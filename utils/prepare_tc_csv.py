@@ -14,14 +14,15 @@ def create_tc_csv(thumbnail_path, output_path):
     folder = glob.glob(os.path.join(thumbnail_path, '*.jpg'))
     print(folder)
     for file_name in folder:
-        data_file.append([file_name.split("\\")[2]])
+        print(file_name)
+        data_file.append([file_name.split("/")[2]])
         print(file_name)
     
     with open(os.path.join(output_path,'container_list2.csv'), 'w') as fout:
         writer = csv.writer(fout)
         writer.writerows(sorted(data_file, key=natural_keys))
         fout.close()
-    
+    print("creating container_list")
     remove_empty_rows(os.path.join(output_path,'container_list2.csv'), os.path.join(output_path,'container_list.csv'))
     os.remove(os.path.join(output_path,'container_list2.csv'))
 
